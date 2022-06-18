@@ -19,13 +19,14 @@ io.on("connection", (socket) => {
     console.log("New WebSocket Connection");
 
     socket.emit('message', welcomeMessage)
+    socket.broadcast.emit('message', 'A new user has joined!')
 
-    socket.emit('countUpdated', count)
+    socket.on("sendMessage", (message) => {
+        io.emit('message', message)
+    })
 
-    socket.on('increment', () => {
-      count++
-      // socket.emit('countUpdated', count)
-      io.emit('countUpdated', count)
+    socket.on("disconnect", () => {
+      io.emit('message', "A user has left!")
     })
   });
 

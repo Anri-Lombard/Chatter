@@ -8,8 +8,19 @@ socket.on('message', (welcomeMessage) => {
     console.log(welcomeMessage);
 })
 
-document.querySelector('#increment').addEventListener('click', () => {
-    console.log("Clicked");
+document.querySelector('#message-form').addEventListener('submit', (e) => {
+    e.preventDefault()
 
-    socket.emit('increment')
+    const message = e.target.elements.messageToSend.value
+
+    socket.emit('sendMessage', message)
+})
+
+document.querySelector('#send-location').addEventListener('click', () => {
+    if (!navigator.geolocation) 
+        return alert("Geolocation is not supported for your browser.")
+    
+    navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position);
+    })
 })
