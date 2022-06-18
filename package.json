@@ -1,0 +1,17 @@
+{
+  "name": "nodechatapp",
+  "version": "1.0.0",
+  "description": "Chat app built with nodejs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "Anri Lombard",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16",
+    "socket.io": "^4.5.1"
+  }
+}
