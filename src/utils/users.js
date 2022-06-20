@@ -1,12 +1,12 @@
 const users = []
 
-const addUser = ({ id, username, room }) => {
+const addUser = ({ id, username, roomname }) => {
     // clean
     username = username.trim().toLowerCase();
-    room = room.trim().toLowerCase();
+    roomname = roomname.trim().toLowerCase();
 
     // validate
-    if (!username || !room) {
+    if (!username || !roomname) {
         return {
             error: "Username and room are required!"
         }
@@ -14,7 +14,7 @@ const addUser = ({ id, username, room }) => {
 
     // Check for existing users
     const existingUser = users.find((user) => {
-        return user.room === room && user.username === username
+        return user.roomname === roomname && user.username === username
     })
 
     // Validate username
@@ -25,7 +25,7 @@ const addUser = ({ id, username, room }) => {
     }
 
     // Store user
-    const user = { id, username, room }
+    const user = { id, username, roomname }
     users.push(user)
     return { user }
 }
@@ -43,20 +43,15 @@ const getUser = (id) => {
     return user
 }
 
-const getUsersInRoom = (room) => {
-    room = room.trim().toLowerCase()
-    const usersInRoom = users.filter((user) => user.room === room)
+const getUsersInRoom = (roomname) => {
+    roomname = roomname.trim().toLowerCase()
+    const usersInRoom = users.filter((user) => user.roomname === roomname)
     return usersInRoom
 }
 
-addUser({
-    id: 22,
-    username: "Anri",
-    room: "SA"
-})
-
-addUser({
-    id: 23,
-    username: "Anris",
-    room: "SA"
-})
+module.exports = {
+    addUser,
+    removeUser,
+    getUser,
+    getUsersInRoom
+}
